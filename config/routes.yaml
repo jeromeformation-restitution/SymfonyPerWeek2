@@ -8,3 +8,5 @@ app_produit_liste:
     path: /produits
     controller: App\Controller\ProductController::liste
     methods: ['GET']
+app_logout:
+    path: /logout

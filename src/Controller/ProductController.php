@@ -27,7 +27,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/produits/formulaire")
+     * @Route("/admin/produits/formulaire")
      * @param Request $request
      * @return Response
      */
