@@ -1,0 +1,10 @@
+#index:
+##    path: /
+##    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\HomeController::index
+app_produit_liste:
+    path: /produits
+    controller: App\Controller\ProductController::liste
+    methods: ['GET']

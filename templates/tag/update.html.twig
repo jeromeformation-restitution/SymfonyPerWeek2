@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Nouveau tag{% endblock %}
+
+{% block body %}
+    <h1>Créer un nouveau tag</h1>
+
+    {{ form_start(TagForm) }}
+    {{ form_widget(TagForm) }}
+    <input type="submit" class="btn btn-warning" value="Modifier un tag">
+    {{ form_end(TagForm) }}
+{% endblock %}
