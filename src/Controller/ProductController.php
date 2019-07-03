@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Category;
 use App\Entity\Product;
+use App\Form\ProductType;
+use Doctrine\Common\Persistence\ObjectManager;
 use Exception;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -30,23 +32,27 @@ class ProductController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function create(Request $request): Response
+    public function create(Request $request, ObjectManager $entityManager): Response
     {
-        $category=$this->getDoctrine()->getRepository(Category::class)
-            ->find(1);
         $product=new Product();
-        $product->setName('ventilo')
+        /*$product->setName('ventilo')
             ->setDescription('msfkldlodsjumgfildjgisfdugiodfhgiorhdsgio')
             ->setImageName('ventilateur.jpg')
             ->setIsPublished(true)
             ->setPrice(12.00)
             ->setCategory($category);
-
-        $manager=$this->getDoctrine()->getManager();
-        $manager->persist($product);
-        $manager->flush();
-
-        return $this->render('produit/formulaire.html.twig');
+        */
+        $form = $this->createForm(ProductType::class, $product);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($product);
+            $entityManager->flush();
+            return $this->redirectToRoute('app_produit_liste');
+        }
+        return $this->render('produit/formulaire.html.twig', [
+            'produit' => $product,
+            'form' => $form->createView(),
+        ]);
     }
 
 

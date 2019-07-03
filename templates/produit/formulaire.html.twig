@@ -1,16 +1,18 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}
-
+Création de produit
 {% endblock %}
 
 {% block body %}
-    <h1>Formulaire</h1>
-    <br>
-    <form method="post">
-        <input type="text" name="Astre">
-        <input type="submit">
-    </form>
+    <div class="mt-5">
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Valider la création du produit">
+        {{ form_end(form) }}
+    </div>
 
 {% endblock %}
+
+
 
