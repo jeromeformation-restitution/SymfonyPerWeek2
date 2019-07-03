@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+Changer le Role
+{% endblock %}
+{% block body %}
+    Utilisateur : {{ user.email }}
+    {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <input type="submit" class="btn btn-success" value="Valider le nouveau Role">
+    {{ form_end(form) }}
+{% endblock %}
+
+
+
