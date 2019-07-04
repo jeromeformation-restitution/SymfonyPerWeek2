@@ -18,6 +18,28 @@
                     <a class="nav-link" href="{{ path('app_product_create') }}">Formulaire</a>
                 </li>
             </ul>
+
+            <ul class="navbar-nav mr-auto">
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_logout') }}">Déconnexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link">Bonjour {{ app.user.email }}</a>
+                    </li>
+
+
+                {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Connexion</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+                    </li>
+                {% endif %}
+            </ul>
+
         </div>
     </div>
 </nav>

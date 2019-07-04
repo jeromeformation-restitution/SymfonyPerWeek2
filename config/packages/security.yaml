@@ -3,6 +3,11 @@ security:
         App\Entity\User:
             algorithm: argon2i
 
+    role_hierarchy:
+        ROLE_MODERATEUR: ROLE_USER
+        ROLE_ADMIN: ROLE_MODERATEUR
+        ROLE_SUPER_ADMIN: ROLE_ADMIN
+
     # https://symfony.com/doc/current/security.html#where-do-users-come-from-user-providers
     providers:
         # used to reload user from session & other features (e.g. switch_user)
@@ -21,6 +26,9 @@ security:
             guard:
                 authenticators:
                     - App\Security\AppAuthenticator
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 60800 # 1 week in seconds
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -33,3 +41,5 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/profile, roles: ROLE_USER }
+        - { path: ^/produits/gestion, roles: IS_AUTHENTICATED_REMEMBERED}
+        - { path: ^/produits/supprimer, roles: ROLE_MODERATEUR}

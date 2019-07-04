@@ -94,6 +94,12 @@ class Product
      */
     private $slug;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="products")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $publisher;
+
     public function __construct()
     {
         $this->tags = new ArrayCollection();
@@ -258,5 +264,22 @@ class Product
 
         $slugify = new Slugify();
         $this->slug=$slugify->slugify($this->name);
+    }
+
+    public function getPublisher(): ?User
+    {
+        return $this->publisher;
+    }
+
+    public function setPublisher(?User $publisher): self
+    {
+        $this->publisher = $publisher;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

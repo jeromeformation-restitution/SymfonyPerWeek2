@@ -15,7 +15,15 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text">{{ product.description }}</p>
+                            <p class="card-text">publié par {{ product.publisher.email}}</p>
+
                             <a href="{{ path('produits', {slug:product.slug}) }}" class="card-link btn btn-outline-info">Détail</a>
+                            {% if product.publisher== app.user or is_granted("ROLE_ADMIN") %}
+                                <a href="{{ path('app_product_edit', {slug:product.slug}) }}" class="card-link btn btn-outline-warning">Modifier</a>
+                            {% endif %}
+                                {% if is_granted("ROLE_ADMIN") %}
+                                {{ include('produit/_delete_form.html.twig') }}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
