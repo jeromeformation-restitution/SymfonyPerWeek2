@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
+ * @ORM\HasLifecycleCallbacks()
  */
 class Product
 {
@@ -103,7 +104,6 @@ class Product
     public function __construct()
     {
         $this->tags = new ArrayCollection();
-        $this->createdAt=new DateTime();
         $this->nbViews=0;
     }
 
@@ -276,6 +276,23 @@ class Product
         $this->publisher = $publisher;
 
         return $this;
+    }
+
+    /**
+     * @ORM\PrePersist
+     */
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTime();
+    }
+
+
+    /**
+     * @ORM\PreUpdate()
+     */
+    public function setUpdateAtValue()
+    {
+        $this->updatedAt = new \DateTime();
     }
 
     public function __toString()
