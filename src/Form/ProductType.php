@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Product;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -23,8 +24,13 @@ class ProductType extends AbstractType
             ->add('isPublished', null, [
                 'label' => 'Le produit doit-il être publié ?',
             ])
-            ->add('imageName', null, [
+
+            /*->add('imageName', null, [
                 'label' => 'Upload d\'image à venir'
+            ])*/
+
+            ->add('imageFile', FileType::class, [
+                'label' => 'Choisir votre image'
             ])
             ->add('category', null, [
                 'label' => 'Catégorie associée'
